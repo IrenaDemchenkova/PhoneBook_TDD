@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PhoneBookTest {
     private static PhoneBook testPhoneBook;
 
-    @BeforeEach
-    public void init() {
+    @BeforeAll
+    public static void init() {
         testPhoneBook = new PhoneBook();
     }
 
@@ -32,7 +32,6 @@ public class PhoneBookTest {
         );
     }
 
-
     @ParameterizedTest
     @MethodSource("addNullCase")
     public void addNotEnoughDataTest(String name, String number) {
@@ -47,8 +46,8 @@ public class PhoneBookTest {
         );
     }
 
-    @AfterEach
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         testPhoneBook = null;
     }
 }
