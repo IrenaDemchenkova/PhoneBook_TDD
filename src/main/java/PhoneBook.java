@@ -35,4 +35,8 @@ public class PhoneBook {
             throw new RuntimeException("No such number found");
         }
     }
+
+    public String printAllNames() {
+        return null;
+    }
 }

@@ -78,6 +78,16 @@ public class PhoneBookTest {
         Assertions.assertThrows(Exception.class, () -> testPhoneBook.findByName(null));
     }
 
+    @Test
+    public void printAllNamesTest() {
+        testPhoneBook.phoneBook.put("Ivan", "+79161234567");
+        testPhoneBook.phoneBook.put("Elena", "+74951234567");
+        testPhoneBook.phoneBook.put("Maria", "+79151234567");
+        String expected = "[Elena, Ivan, Maria]";
+        String result = testPhoneBook.printAllNames();
+        assertEquals(expected, result);
+    }
+
     @AfterEach
     public void tearDown() {
         testPhoneBook = null;
