@@ -70,12 +70,14 @@ public class PhoneBookTest {
         String result = testPhoneBook.findByName("Maria");
         assertEquals(expectedNumber, result);
     }
+
     @Test
     public void findByNameNullCaseTest() {
         testPhoneBook.phoneBook.put("Ivan", "+79161234567");
         testPhoneBook.phoneBook.put("Elena", "+74951234567");
         Assertions.assertThrows(Exception.class, () -> testPhoneBook.findByName(null));
     }
+
     @AfterEach
     public void tearDown() {
         testPhoneBook = null;
