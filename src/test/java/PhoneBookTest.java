@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PhoneBookTest {
     private static PhoneBook testPhoneBook;
 
-    @BeforeAll
-    public static void init() {
+    @BeforeEach
+    public void init() {
         testPhoneBook = new PhoneBook();
     }
 
@@ -28,8 +28,7 @@ public class PhoneBookTest {
     private static Stream<Arguments> sourceForAdd() {
         return Stream.of(
                 Arguments.of("Ivan", "+79161234567", 1),
-                Arguments.of("Elena", "+74951234567", 2),
-                Arguments.of("Ivan", "+79161234567", 2)
+                Arguments.of("Ivan", "+79161234567", 1)
         );
     }
 
@@ -63,8 +62,22 @@ public class PhoneBookTest {
         Assertions.assertThrows(Exception.class, () -> testPhoneBook.findByNumber(null));
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @Test
+    public void findByNameTest() {
+        testPhoneBook.phoneBook.put("Maria", "+79151234567");
+        testPhoneBook.phoneBook.put("Olga", "+74981234567");
+        String expectedNumber = "+79151234567";
+        String result = testPhoneBook.findByName("Maria");
+        assertEquals(expectedNumber, result);
+    }
+    @Test
+    public void findByNameNullCaseTest() {
+        testPhoneBook.phoneBook.put("Ivan", "+79161234567");
+        testPhoneBook.phoneBook.put("Elena", "+74951234567");
+        Assertions.assertThrows(Exception.class, () -> testPhoneBook.findByName(null));
+    }
+    @AfterEach
+    public void tearDown() {
         testPhoneBook = null;
     }
 }
