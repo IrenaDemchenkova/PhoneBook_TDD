@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -44,6 +45,22 @@ public class PhoneBookTest {
                 Arguments.of("Maria", null),
                 Arguments.of(null, null)
         );
+    }
+
+    @Test
+    public void findByNumberTest() {
+        testPhoneBook.phoneBook.put("Maria", "+79151234567");
+        testPhoneBook.phoneBook.put("Olga", "+74981234567");
+        String expectedName = "Maria";
+        String result = testPhoneBook.findByNumber("+79151234567");
+        assertEquals(expectedName, result);
+    }
+
+    @Test
+    public void findByNumberNullCaseTest() {
+        testPhoneBook.phoneBook.put("Ivan", "+79161234567");
+        testPhoneBook.phoneBook.put("Elena", "+74951234567");
+        Assertions.assertThrows(Exception.class, () -> testPhoneBook.findByNumber(null));
     }
 
     @AfterAll
