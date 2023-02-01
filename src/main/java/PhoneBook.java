@@ -37,6 +37,6 @@ public class PhoneBook {
     }
 
     public String printAllNames() {
-        return null;
+        return phoneBook.keySet().toString();
     }
 }
